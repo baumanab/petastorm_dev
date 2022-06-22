@@ -24,7 +24,7 @@ PACKAGE_NAME = 'ggstorm'
 with open('README.rst') as f:
     long_description = f.read()
 
-with io.open('ggstorm/__init__.py', 'rt', encoding='utf8') as f:
+with io.open('petastorm/__init__.py', 'rt', encoding='utf8') as f:
     version = re.search(r'__version__ = \'(.*?)\'', f.read()).group(1)
     if version is None:
         raise ImportError('Could not find __version__ in petastorm/__init__.py')
