@@ -199,6 +199,7 @@ def make_reader(dataset_url,
 
 
 def make_batch_reader(dataset_url_or_urls,
+                      omit_unsupported_fields,
                       schema_fields=None,
                       reader_pool_type='thread', workers_count=10,
                       shuffle_row_groups=True, shuffle_row_drop_partitions=1,
@@ -315,6 +316,7 @@ def make_batch_reader(dataset_url_or_urls,
         raise ValueError('Unknown reader_pool_type: {}'.format(reader_pool_type))
 
     return Reader(filesystem, dataset_path_or_paths,
+                  omit_unsupported_fields=omit_unsupported_fields,
                   schema_fields=schema_fields,
                   worker_class=ArrowReaderWorker,
                   reader_pool=reader_pool,
@@ -338,7 +340,7 @@ class Reader(object):
     :ivar last_row_consumed: True if the last row was already returned by the Reader.
     """
 
-    def __init__(self, pyarrow_filesystem, dataset_path, schema_fields=None,
+    def __init__(self, pyarrow_filesystem, dataset_path, omit_unsupported_fields, schema_fields=None,
                  shuffle_row_groups=True, shuffle_row_drop_partitions=1,
                  predicate=None, rowgroup_selector=None, reader_pool=None, num_epochs=1,
                  cur_shard=None, shard_count=None, cache=None, worker_class=None,
@@ -406,7 +408,7 @@ class Reader(object):
                                          validate_schema=False, metadata_nthreads=10,
                                          filters=filters)
 
-        stored_schema = infer_or_load_unischema(self.dataset)
+        stored_schema = infer_or_load_unischema(self.dataset, omit_unsupported_fields=omit_unsupported_fields)
 
         if isinstance(schema_fields, NGram):
             self.ngram = schema_fields
