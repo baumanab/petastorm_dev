@@ -19,7 +19,7 @@ import re
 import setuptools
 from setuptools import setup
 
-PACKAGE_NAME = 'pstormdev'
+PACKAGE_NAME = 'petastorm'
 
 with open('README.rst') as f:
     long_description = f.read()
