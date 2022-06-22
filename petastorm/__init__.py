@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from petastorm.errors import NoDataAvailableError  # noqa: F401
-from petastorm.reader import make_reader, make_batch_reader  # noqa: F401
-from petastorm.transform import TransformSpec  # noqa: F401
+# from petastorm.errors import NoDataAvailableError  # noqa: F401
+# from petastorm.reader import make_reader, make_batch_reader  # noqa: F401
+# from petastorm.transform import TransformSpec  # noqa: F401
 
-__version__ = '0.11.4'
+__version__ = '0.0.1'
