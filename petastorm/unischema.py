@@ -348,8 +348,9 @@ class Unischema(object):
                                   % (column_name, field_type))
                     continue
                 else:
-                    raise
-            unischema_fields.append(UnischemaField(column_name, np_type, field_shape, None, arrow_field.nullable))
+                    continue
+#                     raise
+#             unischema_fields.append(UnischemaField(column_name, np_type, field_shape, None, arrow_field.nullable))
         return Unischema('inferred_schema', unischema_fields)
 
     def __getattr__(self, item) -> Any:
