@@ -407,7 +407,7 @@ def get_schema_from_dataset_url(dataset_url_or_urls, hdfs_driver='libhdfs3', sto
     return stored_schema
 
 
-def infer_or_load_unischema(dataset):
+def infer_or_load_unischema(dataset, omit_unsupported_fields):
     """Try to recover Unischema object stored by ``materialize_dataset`` function. If it can be loaded, infer
     Unischema from native Parquet schema"""
     try:
@@ -415,4 +415,4 @@ def infer_or_load_unischema(dataset):
     except PetastormMetadataError:
         logger.info('Failed loading Unischema from metadata in %s. Assuming the dataset was not created with '
                     'Petastorm. Will try to construct from native Parquet schema.')
-        return Unischema.from_arrow_schema(dataset)
+        return Unischema.from_arrow_schema(dataset, omit_unsupported_fields=omit_unsupported_fields)
